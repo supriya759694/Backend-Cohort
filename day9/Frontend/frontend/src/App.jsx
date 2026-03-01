@@ -9,7 +9,7 @@ function App() {
     .get("http://localhost:3000/api/notes")
     .then((res) => {
       console.log("Data:", res.data);
-      setNotes(res.data.notes); // adjust if needed
+      setNotes(res.data.notes); 
     })
     .catch((err) => {
       console.error("Error fetching:", err);
