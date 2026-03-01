@@ -1,8 +1,10 @@
 // server create karna
 
 const express = require('express');
-const app = express();
+const cors = require('cors');
 const noteModel = require('./models/note.model');
+const app = express();
+app.use(cors());
 
 // - post/api/notes
 // - create new note and save data in mongoDB
