@@ -1,0 +1,84 @@
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html,
+body,
+#root{
+  height: 100%;
+  width: 100%;
+}
+
+html{
+  background-color: #033b3b91;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+form{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 2rem;
+}
+input{
+  padding: 0.8rem;
+  border-radius: 0.5rem;
+  border: none;
+  width: 200px;
+  margin-right: 1rem;
+}
+
+form button{
+  padding: 0.8rem 1.5rem;
+  border-radius: 0.5rem;
+  border: none;
+  background-color: #091e206d;
+  color: white;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+form button:hover{
+  background-color: #091e20;
+}
+
+
+/* Notes container */
+.notes{
+  display: flex;
+  flex-wrap: wrap;           /* makes notes go to next line */
+  gap: 1.5rem;
+  padding: 2rem 3rem;
+  justify-content: flex-start;
+}
+
+/* Individual Note Box */
+.note{
+  background-color: #494949;
+  padding: 1.2rem;
+  border-radius: 1rem;
+  width: 250px;              /* fixed box size */
+  min-height: 150px;
+  color: white;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);  /* clean shadow instead of border */
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+/* Hover effect */
+.note:hover{
+  transform: translateY(-5px);
+  box-shadow: 0 12px 25px rgba(0, 0, 0, 0.3);
+}
+
+button{
+  margin-top: 1rem;
+  margin-right: 0.7rem;
+  padding: 0.5rem 1rem;
+  border-radius: 0.5rem;
+  border: none;
+  background-color: #71271f;
+  color: white;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
