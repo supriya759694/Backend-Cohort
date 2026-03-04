@@ -6,7 +6,7 @@ function App() {
 
 function fetchNotes(){
   axios
-    .get("http://localhost:3000/api/notes")
+    .get("https://backend-cohort-2-0-cvet.onrender.com/api/notes")
     .then((res) => {
 
       setNotes(res.data.notes); 
@@ -17,7 +17,7 @@ function fetchNotes(){
 }
  useEffect(() => {
   axios
-    .get("http://localhost:3000/api/notes")
+    .get("https://backend-cohort-2-0-cvet.onrender.com/api/notes")
     .then((res) => {
       console.log("Data:", res.data);
       setNotes(res.data.notes); 
@@ -31,7 +31,7 @@ function handleSubmit(e){
   e.preventDefault();
   const {title,description} = e.target.elements;
   console.log(title.value,description.value);
-  axios.post("http://localhost:3000/api/notes",{
+  axios.post("https://backend-cohort-2-0-cvet.onrender.com/api/notes",{
     title:title.value,
     description:description.value,
   })
@@ -43,7 +43,7 @@ function handleSubmit(e){
 
 function handleDelete(noteId){
   console.log(noteId);
-  axios.delete(`http://localhost:3000/api/notes/${noteId}`)
+  axios.delete(`https://backend-cohort-2-0-cvet.onrender.com/api/notes/${noteId}`)
     .then(res => {
       console.log(res.data);
       fetchNotes();
@@ -55,7 +55,7 @@ function handleDelete(noteId){
 function handleEdit(noteId){
   const newDescription = prompt("Enter new Description: ");
   if(newDescription){
-    axios.patch(`http://localhost:3000/api/notes/${noteId}`,{
+    axios.patch(`https://backend-cohort-2-0-cvet.onrender.com/api/notes/${noteId}`,{
       description:newDescription
     })
     .then(res =>{
@@ -73,6 +73,8 @@ function handleEdit(noteId){
       <input name="description"type="text" placeholder="Enter Description" />
       <button>Create Note</button>
     </form>
+
+
     <div className="notes">
       {notes.map((note, index) => (
         <div key={index} className="note">
