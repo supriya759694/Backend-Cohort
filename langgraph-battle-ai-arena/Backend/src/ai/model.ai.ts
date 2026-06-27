@@ -17,3 +17,17 @@ export const cohereModel = new ChatCohere({
     model : 'command-a-03-2025',
     apiKey: config.COHERE_API_KEY,
 })
+
+const prompt = "Write a factorial function in JavaScript.";
+
+console.log("Calling Gemini...");
+const gemini = await geminiModel.invoke(prompt);
+console.log("Gemini finished.");
+
+console.log("Calling Mistral...");
+const mistral = await mistralAIModel.invoke(prompt);
+console.log("Mistral finished.");
+
+console.log("Calling Cohere...");
+const cohere = await cohereModel.invoke(prompt);
+console.log("Cohere finished.");

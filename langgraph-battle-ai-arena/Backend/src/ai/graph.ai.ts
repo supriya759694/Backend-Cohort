@@ -20,19 +20,35 @@ const state = new StateSchema({
 
 const solutionNode: GraphNode<typeof state> =async(state)=>{
 
-    const[mistralResponse, cohereResponse] = await Promise.all([
-        mistralAIModel.invoke(state.problem),
-        cohereModel.invoke(state.problem)
-    ])
+    const [mistralResult, cohereResult] = await Promise.allSettled([
+    mistralAIModel.invoke(state.problem),
+    cohereModel.invoke(state.problem),
+]);
 
-    return {
-        solution_1:mistralResponse.text,
-        solution_2:cohereResponse.text,
-    }
+const solution1 =
+    mistralResult.status === "fulfilled"
+        ? mistralResult.value.text
+        : `Mistral Error: ${mistralResult.reason?.message}`;
+
+const solution2 =
+    cohereResult.status === "fulfilled"
+        ? cohereResult.value.text
+        : `Cohere Error: ${cohereResult.reason?.message}`;
+
+return {
+    solution_1: solution1,
+    solution_2: solution2,
+};
+
 }
+
 
 const judgeNode: GraphNode<typeof state> = async(state)=>{
     const {problem, solution_1,solution_2}= state
+    console.log("Judge Input:");
+console.log(state.problem);
+console.log(state.solution_1);
+console.log(state.solution_2);
 
     const judge = createAgent({
         model: geminiModel,
