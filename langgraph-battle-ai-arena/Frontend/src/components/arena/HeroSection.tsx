@@ -28,7 +28,7 @@ const MODELS = [
     { name: 'Gemini Judge', color: 'text-amber-400 bg-amber-950 border-amber-800' },
 ];
 
-export function heroSection(){
+export function HeroSection(){
     return (
         <motion.div
             className="text-center py-16 sm:py-24"
