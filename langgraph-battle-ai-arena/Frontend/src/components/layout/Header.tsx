@@ -33,7 +33,7 @@ export function Header(){
 
     {/* Right side actions */}
     <a
-            href="https://github.com"
+            href="https://github.com/supriya759694"
             target="_blank"
             rel="noreferrer"
             className="p-2 text-zinc-400 hover:text-zinc-100 transition-colors rounded-lg hover:bg-zinc-800"
