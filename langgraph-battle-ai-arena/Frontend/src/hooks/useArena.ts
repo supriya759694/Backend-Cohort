@@ -1,13 +1,12 @@
 import {useState, useCallback} from 'react';
 import toast from 'react-hot-toast';
-import {API_ENDPOINTS} from "../config/app";
 import type{
     ArenaResult,
     ArenaStatus,
-    ApiResponse,
+    
 } from "../types/arena.types";
-import axios, { AxiosError } from 'axios';
-
+import { AxiosError } from 'axios';
+import { runArenaBattle } from '../services/arena.service';
 
 interface UseArenaReturn{
     status: ArenaStatus;
@@ -22,12 +21,16 @@ export function useArena(): UseArenaReturn{
     const [result, setResult] = useState<ArenaResult | null>(null);
     const [error, setError] = useState<string | null>(null);
 
+    console.log("Calling runArenaBattle...");
     const runBattle =  useCallback(async(input: string)=>{
+         console.log('3. runBattle called with:', input);
         //don't do anything if the input is empty
         if(!input.trim()){
             toast.error('please enter a problem to solve');
             return;
         }
+
+        
 
         setStatus('loading');
         setResult(null);
@@ -35,16 +38,28 @@ export function useArena(): UseArenaReturn{
 
         const toastId = toast.loading('AI models are battling... ⚔️');
         try{
-        const response = await axios.post<ApiResponse>(
-        API_ENDPOINTS.invoke,
-        { input }   
-        );
-        setResult(response.data.result);
+
+    const response = await runArenaBattle({
+    input,
+     });
+
+   console.log("SERVICE RESPONSE");
+   console.log(response);
+
+setResult(response.result);
+console.log("Result stored:", response.result);
+setStatus("success");
+
+console.log("Status changed to success");
+
+
+        //setResult(response.data.result);
         setStatus('success');
 
         toast.success('Battle complete! 🏆', { id: toastId });
 
     }catch(error){
+        console.error('6. CAUGHT ERROR:', error); // ADD THIS — note console.error not .log
         let message = 'Something went wrong . please try again';
         if(error instanceof AxiosError){
             if(error.response){

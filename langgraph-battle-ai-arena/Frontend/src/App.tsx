@@ -12,7 +12,10 @@ import { useArena } from './hooks/useArena';
 const App = () => {
   const { status, result, runBattle, reset } = useArena();
 
-   return (
+  console.log("APP STATUS:", status);
+  console.log("APP RESULT:", result);
+
+  return (
     <div className="min-h-screen bg-zinc-950 text-zinc-100">
 
       <Toaster
@@ -33,7 +36,6 @@ const App = () => {
         {/* AnimatePresence: animates components when they mount/unmount */}
         <AnimatePresence mode="wait">
 
-          {/* IDLE state: show hero + input */}
           {status === 'idle' && (
             <>
               <HeroSection />
@@ -50,9 +52,9 @@ const App = () => {
           )}
 
           {/* SUCCESS state: show results */}
-          {status === 'success' && result && (
+          {status === 'success' && result ? (
             <ArenaResults result={result} onReset={reset} />
-          )}
+          ) : null}
 
           {status === 'error' && (
             <div className="flex flex-col items-center gap-4 py-20 text-center">

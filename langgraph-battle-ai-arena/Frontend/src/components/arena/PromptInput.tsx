@@ -21,11 +21,18 @@ export function PromptInput({ onSubmit, isLoading }: PromptInputProps) {
   const [value, setValue] = useState('');
   const textareaRef = useRef<HTMLTextAreaElement>(null);
 
+  // const handleSubmit = () => {
+  //   if (value.trim() && !isLoading) {
+  //     onSubmit(value.trim());
+  //   }
+  // };
   const handleSubmit = () => {
-    if (value.trim() && !isLoading) {
-      onSubmit(value.trim());
-    }
-  };
+  console.log('1. handleSubmit fired', value);
+  if (value.trim() && !isLoading) {
+    console.log('2. calling onSubmit with:', value.trim()); // ADD THIS
+    onSubmit(value.trim());
+  }
+};
 
   // Ctrl+Enter or Cmd+Enter submits the form
   const handleKeyDown = (e: KeyboardEvent<HTMLTextAreaElement>) => {
